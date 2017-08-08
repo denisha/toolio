@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>{{ title }} - Test</title>
+  </head>
+  <body>
+    <h1>Hi, {{ user }}</h1>
+
+
+      <h2>Create your query</h2>
+        <h3><table><form nameaction="" method="POST"> 
+          <tr>
+          <td>
+          <label>Select Table :</label>
+            <select name="table_name" width="300px">
+            {% for table_name in tables %}
+            <option value="{{ table_name }}" {% if form_data.get("table_name") == table_name %} selected {% endif %}>{{ table_name }}</option>
+            {% endfor %}
+            </select>
+          </td>
+          <td>
+        <input type="submit" name="Add Table" value="Add Tabe" />
+        </td>
+        </tr>
+       {% if form_data.get("table_name") %}
+       <tr>
+         <td>
+            <select name="column_name" width="300px">
+            {% for column_name in columns %}
+            <option value="{{ column_name }}" >{{ column_name }}</option>
+            {% endfor %}
+            </select>
+          </td>
+           </td>
+       </tr>
+       {% endif %}
+
+        </form></table></h3>
+
+
+  </body>
+</html>

@@ -18,7 +18,7 @@ def index(page=1):
     return render_template("index.html", list_records=list_records)
 
 
-@app.route('/add_record', methods=['GET', 'POST'])
+@app.route('/customer', methods=['GET', 'POST'])
 def add_record():
     form = Form_Record_Add(request.form)
 
@@ -33,7 +33,24 @@ def add_record():
             logger.info("Adding a new record.")
             flash("Record added successfully.", category="success")
 
-    return render_template("add_record.html", form=form)
+    return render_template("customer.html", form=form)
+
+@app.route('/product')
+def product():
+    form = Form_Record_Add(request.form)
+
+    if request.method == 'POST':
+        if form.validate():
+            new_record = SampleTable()
+
+            title = form.title.data
+            description = form.description.data
+
+            new_record.add_data(title, description)
+            logger.info("Adding a new record.")
+            flash("Record added successfully.", category="success")
+
+    return render_template("customer.html", form=form)
 
 
 @threaded_async

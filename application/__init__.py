@@ -1,7 +1,7 @@
 from flask import Flask
 import logging
-from flask.ext.cache import Cache
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_cache import Cache
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask('application')
 
@@ -17,3 +17,4 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 import views
+

@@ -19,7 +19,7 @@ def index(page=1):
 
 
 @app.route('/customer', methods=['GET', 'POST'])
-def add_record():
+def customer():
     form = Form_Record_Add(request.form)
 
     if request.method == 'POST':
@@ -37,21 +37,10 @@ def add_record():
 
 @app.route('/product')
 def product():
-    form = Form_Record_Add(request.form)
-
-    if request.method == 'POST':
-        if form.validate():
-            new_record = SampleTable()
-
-            title = form.title.data
-            description = form.description.data
-
-            new_record.add_data(title, description)
-            logger.info("Adding a new record.")
-            flash("Record added successfully.", category="success")
-
-    return render_template("customer.html", form=form)
-
+    m_tasks = SampleTable()
+    page = 1
+    list_of_products = m_tasks.list_all(page, app.config['LISTINGS_PER_PAGE'])
+    return render_template("product.html", list_of_products=list_of_products)
 
 @threaded_async
 def send_email(app, to, subject, body):

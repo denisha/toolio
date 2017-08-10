@@ -35,6 +35,14 @@ def add_record():
 
     return render_template("add_record.html", form=form)
 
+@app.route('/customer', methods=['GET', 'POST'])
+def customer():
+    return render_template("customer.html")
+
+
+@app.route('/product', methods=['GET', 'POST'])
+def product():
+    return render_template("product.html")
 
 @threaded_async
 def send_email(app, to, subject, body):
